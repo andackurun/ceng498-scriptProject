@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
+</head>
+<body>
+<div data-role="page" id="loginPage">
+  <div data-role="header">
+    <h1>Main Page</h1>
+  </div>
+  <div data-role="content">
+  	<div data-role="fieldcontain">
+  		<input type="hidden" name="operationType" value="40"/>
+ 		<label for="username">Username:</label>
+  		<input type="text" name="username" id="username"/>
+  		<a href="#mainPage" id="submitLogin" data-role="button">Login</a>
+  	</div>
+  </div>
+  <div data-role="footer">
+    <h1>Footer</h1>
+  </div>
+</div>
+<div data-role="page" id="mainPage">
+  
+  <div data-role="header">
+    <h1>Main Page</h1>
+  </div>
+  <div data-role="content">
+  <table border="1">
+  	<tr>
+  		<td>
+  			<canvas id="myCanvas" width="800" height="600" style="border:1px solid #000;"/>
+  		</td>
+  		<td>
+  			<button id="drawLineButton">Draw a Line</button>
+  			<button id="drawRectangleButton">Draw a Rectangle</button>
+  			<button id="drawSquareButton">Draw a Square</button>
+  			<button id="drawCircleButton">Draw a Circle</button>
+  			<button id="drawTriangleButton">Draw a Triangle</button>
+  			<button id="clearButton">Clear Image</button>
+  			<button id="deleteButton">Delete Object</button>
+  			<button id="resizeButton">Resize Object</button>
+  			<button id="saveButton">Save Image</button>
+  			<button id="moveButton">Move Object</button>
+  			<input type="text" id="txt">
+  			<button id="writeTextButton"> Write Text </button>
+		    <label for="points">Scale:</label>
+    		<input type="range" name="scale" id="scale" value="1" min="0" max="10">
+
+		  	<form id="sendCommandForm">
+		  		<div data-role="fieldcontain">
+					<label for="opType">Operation Type:</label>
+		  			<input type="hidden" name="operationType" id="opType"/>
+		 			<label for="text">Text:</label>
+		   			<input type="hidden" name="text" id="text"/>
+		  			<label for="param1">Param1:</label>
+		   			<input type="hidden" name="param1" id="param1"/>
+		 			<label for="param2">Param2:</label>
+		   			<input type="hidden" name="param2" id="param2"/>
+		 			<label for="param3">Param3:</label>
+		   			<input type="hidden" name="param3" id="param3"/>
+		 			<label for="param4">Param4:</label>
+		   			<input type="hidden" name="param4" id="param4"/>
+		 			<label for="param5">Param5:</label>
+		   			<input type="hidden" name="param5" id="param5"/>
+		 			<label for="param6">Param6:</label>
+		  			<input type="hidden" name="param6" id="param6"/>
+		  			<button id="submitAction" type="submit">Submit</button>
+		  		</div>
+		  	</form>
+			<p id="returnVal">Return Value will come here</p>
+  		</td>
+  	</tr>
+  </table>
+  </div>
+  <div data-role="footer">
+    <h1>Footer</h1>
+  </div>
+</div>
+	<script src="helper.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#submitLogin").click(function(){
+				$.cookie("username", $("#username").val());
+			});
+			$("#drawLineButton").click(function(){
+				operationButton = 0;
+			});
+			$("#drawRectangleButton").click(function(){
+				operationButton = 2;
+			});
+			$("#drawCircleButton").click(function(){
+				operationButton = 4;
+			});
+			$("#drawSquareButton").click(function(){
+				operationButton = 3;
+			});
+			$("#drawTriangleButton").click(function(){
+				operationButton = 1;
+			});
+			$("#deleteButton").click(function(){
+				operationButton = 13;
+			});
+			$("#clearButton").click(function(){
+				clearCanvas();
+				ajaxCalls(9);
+			});
+			$("#moveObjectButton").click(function(){
+				operationButton = 20;
+			});
+			$("#resizeButton").click(function(){
+				operationButton = 14;
+			});
+			$("#saveButton").click(function(){
+				clearCanvas();
+				ajaxCalls(5);
+			});
+			$("#moveButton").click(function(){
+				operationButton = 16;
+			});
+			$("#writeTextButton").click(function(){
+				$('#text').val($('#txt').val());
+				operationButton = 10;
+			});
+		});
+	</script>
+
+</body>
+</html>
